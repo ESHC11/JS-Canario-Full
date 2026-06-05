@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Heart, Shirt, Flame, Scissors, Sparkles, Footprints } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/products/ProductCard';
 
 const CATEGORIES = [
@@ -52,7 +51,7 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
+    fetch('/api/products')
       .then(res => res.json())
       .then(data => {
         if (data.success) {
