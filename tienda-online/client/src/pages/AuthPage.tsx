@@ -74,17 +74,20 @@ export default function AuthPage() {
           top: '2rem',
           left: '2rem',
           zIndex: 100,
-          background: 'transparent',
-          border: 'none',
-          color: '#fff',
-          mixBlendMode: 'difference',
+          background: '#fff',
+          border: '1px solid #eaeaea',
+          color: '#111',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
-          fontSize: '1rem',
+          padding: '0.6rem 1.2rem',
+          borderRadius: '999px',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+          fontSize: '0.95rem',
           fontWeight: '500',
-          fontFamily: 'var(--font-sans)'
+          fontFamily: 'var(--font-sans)',
+          transition: 'all 0.2s ease'
         }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
