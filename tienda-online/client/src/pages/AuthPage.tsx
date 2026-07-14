@@ -75,6 +75,31 @@ export default function AuthPage() {
   return (
     <div className="auth-slider-container">
       
+      {/* Botón de regreso */}
+      <button 
+        onClick={() => navigate('/')}
+        style={{
+          position: 'absolute',
+          top: '2rem',
+          left: '2rem',
+          zIndex: 100,
+          background: 'transparent',
+          border: 'none',
+          color: 'var(--text-primary)',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontSize: '1rem',
+          fontFamily: 'var(--font-sans)'
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Volver a la tienda
+      </button>
+
       {/* TEXTO IZQUIERDO (Se ve cuando la caja negra está a la derecha en Registro) */}
       <div className="auth-text-bg left-text">
         <h1 className="frase-hero">
