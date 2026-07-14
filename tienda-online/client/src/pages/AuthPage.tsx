@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import api from '../services/api';
 
 export default function AuthPage() {
   const navigate = useNavigate();
@@ -27,19 +28,14 @@ export default function AuthPage() {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: loginEmail, password: loginPassword })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Error en el inicio de sesión');
+      const res = await api.post('/auth/login', { email: loginEmail, password: loginPassword });
+      const data = res.data;
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       navigate(data.user.role === 'ADMIN' ? '/admin' : '/');
     } catch (err: any) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message || 'Error en el inicio de sesión');
     }
   };
 
@@ -47,19 +43,14 @@ export default function AuthPage() {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: regName, email: regEmail, password: regPassword })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Error en el registro');
+      const res = await api.post('/auth/register', { name: regName, email: regEmail, password: regPassword });
+      const data = res.data;
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       navigate(data.user.role === 'ADMIN' ? '/admin' : '/');
     } catch (err: any) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message || 'Error en el registro');
     }
   };
 
