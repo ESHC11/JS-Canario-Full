@@ -2,7 +2,7 @@ services:
   - type: web
     name: js-canario-backend
     env: node
-    rootDir: server
+    rootDir: tienda-online/server
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
