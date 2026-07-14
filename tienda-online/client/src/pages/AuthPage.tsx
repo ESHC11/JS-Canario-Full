@@ -76,12 +76,14 @@ export default function AuthPage() {
           zIndex: 100,
           background: 'transparent',
           border: 'none',
-          color: 'var(--text-primary)',
+          color: '#fff',
+          mixBlendMode: 'difference',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
           fontSize: '1rem',
+          fontWeight: '500',
           fontFamily: 'var(--font-sans)'
         }}
       >
