@@ -7,20 +7,9 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "server/src/app.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": "server/prisma/**"
-      }
     }
   ],
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/server/src/app.ts"
-    },
     {
       "source": "/(.*)",
       "destination": "/client/$1"

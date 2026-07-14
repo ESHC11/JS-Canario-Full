@@ -35,11 +35,9 @@ app.use('/api/upload', uploadRoutes)
 // Middlewares de manejo de errores
 app.use(errorHandler)
 
-// Iniciar servidor solo si no estamos en Vercel
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Servidor corriendo en http://localhost:${PORT}`)
-    })
-}
+// Iniciar servidor siempre (requerido para Render)
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`)
+})
 
 export default app

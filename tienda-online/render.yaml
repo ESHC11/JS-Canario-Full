@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: js-canario-backend
+    env: node
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # El resto de variables (DATABASE_URL, JWT_SECRET, CLOUDINARY_*) 
+      # deberás agregarlas manualmente en el dashboard de Render.
