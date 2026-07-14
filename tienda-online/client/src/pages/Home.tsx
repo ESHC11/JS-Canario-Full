@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/products/ProductCard';
+import { productService } from '../services/productService';
 
 const CATEGORIES = [
   { 
@@ -51,11 +52,10 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('/api/products')
-      .then(res => res.json())
+    productService.getAll()
       .then(data => {
-        if (data.success) {
-          setProducts(data.data);
+        if (data) {
+          setProducts(data);
         }
       })
       .catch(err => console.error("Error fetching products:", err));
