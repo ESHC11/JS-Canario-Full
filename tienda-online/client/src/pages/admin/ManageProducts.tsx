@@ -22,25 +22,8 @@ export default function ManageProducts() {
         }
     };
 
-    const handleCreate = async () => {
-        const name = prompt("Nombre del producto");
-        if (!name) return;
-        const basePrice = parseFloat(prompt("Precio base") || "0");
-        const categoryId = prompt("ID de la categoría (revisa ManageCategories para ver los IDs)");
-        if (!categoryId) return;
-
-        try {
-            await productService.create({
-                name,
-                basePrice,
-                categoryId,
-                images: ["https://via.placeholder.com/150"]
-            });
-            alert("Producto creado");
-            loadData(); // Recargar la lista
-        } catch (error) {
-            alert("Error al crear");
-        }
+    const handleCreate = () => {
+        window.location.href = '/admin/products/new';
     };
 
     const handleDelete = async (id: string) => {
@@ -65,33 +48,43 @@ export default function ManageProducts() {
                 </button>
             </div>
 
-            <table style={{ width: '100%', marginTop: '2rem', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr style={{ background: '#222', textAlign: 'left' }}>
-                        <th style={{ padding: '1rem' }}>Nombre</th>
-                        <th style={{ padding: '1rem' }}>Precio</th>
-                        <th style={{ padding: '1rem' }}>Categoría</th>
-                        <th style={{ padding: '1rem' }}>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(product => (
-                        <tr key={product.id} style={{ borderBottom: '1px solid #333' }}>
-                            <td style={{ padding: '1rem' }}>{product.name}</td>
-                            <td style={{ padding: '1rem' }}>${product.basePrice.toFixed(2)}</td>
-                            <td style={{ padding: '1rem' }}>{product.category?.name || product.categoryId}</td>
-                            <td style={{ padding: '1rem' }}>
-                                <button 
-                                    style={{ background: '#e74c3c', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer' }}
-                                    onClick={() => handleDelete(product.id)}
-                                >
-                                    Eliminar
-                                </button>
-                            </td>
+            <div className="admin-card" style={{ marginTop: '2rem', padding: 0, overflow: 'hidden' }}>
+                <table className="admin-table">
+                    <thead>
+                        <tr style={{ background: 'rgba(255,255,255,0.02)' }}>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Categoría</th>
+                            <th>Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {products.map(product => (
+                            <tr key={product.id}>
+                                <td>
+                                    {product.images && product.images[0] ? (
+                                        <img src={product.images[0]} alt={product.name} style={{ width: 40, height: 40, borderRadius: 4, objectFit: 'cover' }} />
+                                    ) : (
+                                        <div style={{ width: 40, height: 40, borderRadius: 4, background: '#333' }} />
+                                    )}
+                                </td>
+                                <td>{product.name}</td>
+                                <td>${product.basePrice.toFixed(2)}</td>
+                                <td>{product.category?.name || product.categoryId}</td>
+                                <td>
+                                    <button 
+                                        style={{ background: 'rgba(231, 76, 60, 0.1)', color: '#e74c3c', border: '1px solid rgba(231, 76, 60, 0.2)', padding: '0.4rem 0.8rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
+                                        onClick={() => handleDelete(product.id)}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

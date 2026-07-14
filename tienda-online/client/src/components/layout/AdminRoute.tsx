@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import AdminLayout from "../admin/AdminLayout";
 
 export default function AdminRoute() {
   const { user, isLoading } = useAuth();
@@ -13,6 +14,6 @@ export default function AdminRoute() {
     return <Navigate to="/" replace />;
   }
 
-  // Si es ADMIN, le permitimos ver el contenido (Dashboard)
-  return <Outlet />;
+  // Si es ADMIN, le permitimos ver el contenido envuelto en el layout
+  return <AdminLayout />;
 }

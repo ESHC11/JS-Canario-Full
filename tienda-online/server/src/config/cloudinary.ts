@@ -15,4 +15,21 @@ export const uploadToCloudinary = async (filePath: string): Promise<string> => {
     })
     return result.secure_url
 }
+
+export const uploadBufferToCloudinary = (buffer: Buffer): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            { folder: 'js-canario', transformation: [{ width: 800, crop: 'limit' }, { quality: 'auto' }] },
+            (error, result) => {
+                if (result) {
+                    resolve(result.secure_url)
+                } else {
+                    reject(error)
+                }
+            }
+        )
+        stream.end(buffer)
+    })
+}
+
 export default cloudinary

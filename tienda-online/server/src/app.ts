@@ -8,6 +8,7 @@ import categoryRoutes from "./routes/category.routes";
 import orderRoutes from "./routes/order.routes";
 import paymentRoutes from "./routes/payment.routes";
 import userRoutes from "./routes/user.routes";
+import uploadRoutes from "./routes/upload.routes";
 import { errorHandler } from "./middleware/errorHandler";
 
 dotenv.config()
@@ -29,6 +30,7 @@ app.use('/api/categories', categoryRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/payments', paymentRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/upload', uploadRoutes)
 
 // Middlewares de manejo de errores
 app.use(errorHandler)
